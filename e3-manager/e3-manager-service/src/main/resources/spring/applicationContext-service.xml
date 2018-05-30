@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <context:component-scan base-package="com.ancrazyking.service"></context:component-scan>
+
+    <!--使用dubbo发布服务-->
+    <dubbo:application name="e3-manager"></dubbo:application>
+    <!--注册服务-->
+    <dubbo:registry protocol="zookeeper" address="192.168.25.135:2181"></dubbo:registry>
+
+    <!--用dubbo在20880端口暴露服务-->
+    <dubbo:protocol name="dubbo"></dubbo:protocol>
+    <dubbo:service interface="com.ancrazyking.service.ItemService" ref="itemServiceImpl" timeout="60000"></dubbo:service>
+</beans>
